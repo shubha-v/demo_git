@@ -1,0 +1,107 @@
+<html>
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <link rel="stylesheet" href="style.css">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="navigation" id="sticky-nav">
+        <div class="container">
+	
+            <div class="top-logo">
+                <a href="#"><img src="//cdn.shopify.com/s/files/1/0047/9730/0847/files/nurserylive-logo_ba07527e-5e6e-4b78-9553-1b5cde7080ab_200x40.png?v=1598459506"></a>
+            </div>
+            
+            <nav id='cssmenu' class="navigation">
+                <div id="head-mobile"></div>
+                <div class="button"></div>
+
+                <ul>
+                  <li class="has-sub"><span class="submenu-button"></span><a href="https://www.google.com/">Plants</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">Avenue Plants</a></li>
+                        <li><a href="#">Bonsai Plants</a></li>
+                        <li><a href="#">Cactus Plants</a></li>
+                        <li><a href="#">Fruits Plants</a></li>
+                        <li><a href="#">Vegetables Plants</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub"><span class="submenu-button"></span><a href="#">Seeds</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Vegetables Seeds</a></li>
+                            <li><a href="#">Fruits Seeds</a></li>
+                            <li><a href="#">Organic Seeds</a></li>
+                            <li><a href="#">Bamboo Seeds</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Login</a></li>
+                  </ul>
+            </nav>
+        </div>
+    </header>
+<script>
+   (function($) {
+$.fn.menumaker = function(options) {  
+ var cssmenu = $(this), settings = $.extend({
+   format: "dropdown",
+   sticky: false
+ }, options);
+ return this.each(function() {
+   $(this).find(".button").on('click', function(){
+     $(this).toggleClass('menu-opened');
+     var mainmenu = $(this).next('ul');
+     if (mainmenu.hasClass('open')) { 
+       mainmenu.slideToggle().removeClass('open');
+     }
+     else {
+       mainmenu.slideToggle().addClass('open');
+       if (settings.format === "dropdown") {
+         mainmenu.find('ul').show();
+       }
+     }
+   });
+   cssmenu.find('li ul').parent().addClass('has-sub');
+multiTg = function() {
+     cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+     cssmenu.find('.submenu-button').on('click', function() {
+       $(this).toggleClass('submenu-opened');
+       if ($(this).siblings('ul').hasClass('open')) {
+         $(this).siblings('ul').removeClass('open').slideToggle();
+       }
+       else {
+         $(this).siblings('ul').addClass('open').slideToggle();
+       }
+     });
+   };
+   if (settings.format === 'multitoggle') multiTg();
+   else cssmenu.addClass('dropdown');
+   if (settings.sticky === true) cssmenu.css('position', 'fixed');
+resizeFix = function() {
+  var mediasize = 1000;
+     if ($( window ).width() > mediasize) {
+       cssmenu.find('ul').show();
+     }
+     if ($(window).width() <= mediasize) {
+       cssmenu.find('ul').hide().removeClass('open');
+     }
+   };
+   resizeFix();
+   return $(window).on('resize', resizeFix);
+ });
+  };
+})(jQuery);
+
+(function($){
+$(document).ready(function(){
+$("#cssmenu").menumaker({
+   format: "multitoggle"
+});
+});
+})(jQuery);
+</script>
+</body>
+</html>
