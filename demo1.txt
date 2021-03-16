@@ -1,0 +1,8 @@
+hiii - master branch
+
+hii - sub branch
+
+hello - creating conflict from master branch
+
+hello - creating conflict from sub branch
+
